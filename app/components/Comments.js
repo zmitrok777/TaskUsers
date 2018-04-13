@@ -20,9 +20,9 @@ class Comments extends Component {
     render() {
         return (
             <div>
-                <div>
-                    <p>{this.props.post.id}  {this.props.post.title}</p>
-                    <p>{this.props.post.body}</p>
+                <div className='text'>
+                    <p>{this.props.post.id}</p>
+                    <p className='postText'>{this.props.post.title}<br/> <br/>{this.props.post.body}</p>
                 </div>
                 <div>
                     {this.showComments()}

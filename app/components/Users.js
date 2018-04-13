@@ -16,36 +16,30 @@ class Users extends Component {
         this.showUsers = () => {
             return this.props.value.map((item)=>(
                 <Link to='/posts' key={item.id}>
-                    <div className='user' onClick={() =>{this.showPosts(item.id, item)}}>
-                        <h3>{item.name}</h3>
-                        <p>{item.username}</p>
-                        <p>{item.email}</p>
-                        <p>{item.phone}</p>
+                    <div className='user' onClick={() =>{
+                        this.showPosts(item.id, item);
+                        this.selectUser(item);
+                    }}>
+                        <p className='userName'><strong>{item.name}</strong><br/>{item.company.name}</p>
+                        <p className='contacts'>{item.email} <br/> {item.phone}</p>
                     </div>
                 </Link>
 
             ));
         };
 
-        this.showPosts = (id, user) => {
-            this.state.userPosts = [];
-            this.setState({userPosts: this.state.userPosts});
-            this.state.posts.forEach((item)=>{
-                if(item.userId == id) {
-                    this.state.userPosts.push(item);
-                    this.state.selectedUser = user;
-                    this.setState({
-                        userPosts: this.state.userPosts,
-                        selectedUser: user
-                    });
-                }
-            });
+        this.selectUser = (user) => {
+            this.setState({ selectedUser: user});
         };
-        this.posts = fetch('https://jsonplaceholder.typicode.com/posts')
-            .then(response => response.json())
-            .then(json => {
-                this.setState({posts: json});
-            });
+
+        this.showPosts = (id) => {
+            this.setState({userPosts: []});
+            fetch('https://jsonplaceholder.typicode.com/posts?userId='+id)
+                .then(response => response.json())
+                .then(json => {
+                    this.setState({userPosts: json});
+                });
+        };
     }
 
 
