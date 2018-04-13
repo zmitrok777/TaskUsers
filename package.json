@@ -1,0 +1,27 @@
+{
+  "name": "taskusers",
+  "version": "1.0.0",
+  "description": "Repository include project with  using React(Redux), ES6,Webpack, API.",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "author": "Dmitry Romanchuk",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-owl-carousel": "^2.2.0",
+    "react-responsive-carousel": "^3.1.36",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "^1.1.4"
+  },
+  "devDependencies": {
+    "babel-loader": "^7.1.4",
+    "css-loader": "^0.28.11",
+    "style-loader": "^0.20.3",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14",
+    "webpack-dev-server": "^3.1.3"
+  }
+}
