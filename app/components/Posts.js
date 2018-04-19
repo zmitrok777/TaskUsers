@@ -41,12 +41,13 @@ class Posts extends Component {
                <Comments/>
           );
         };
+        const selectedUser = this.props.selectedUser;
                 return (
                     <Router>
                         <div>
                             <div className='user'>
-                                <p className='userName'><strong>{this.props.selectedUser.name}</strong><br/>{this.props.selectedUser.company.name}</p>
-                                <p className='contacts'>{this.props.selectedUser.email} <br/> {this.props.selectedUser.phone}</p>
+                                <p className='userName'><strong>{selectedUser.name}</strong><br/>{selectedUser.company.name}</p>
+                                <p className='contacts'>{selectedUser.email} <br/> {selectedUser.phone}</p>
                             </div>
                             <Route path='/posts' component={PostsComponent}/>
                             <Route path='/post/comments' component={CommentsComponent}/>

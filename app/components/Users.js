@@ -12,11 +12,12 @@ import {showSelectedUser} from '../redux/modules/posts/postsActions';
 class Users extends Component {
     constructor(props) {
         super(props);
+        const users = this.props.users;
         this.showUsers = () => {
-            if(this.props.users.length === 0) {
+            if(users.length === 0) {
                 this.props.showUsers();
             }
-            return this.props.users.map((item)=>(
+            return users.map((item)=>(
                 <Link to='/posts' key={item.id}>
                     <div className='user' onClick={() =>{
                         this.handleShowPosts(item);

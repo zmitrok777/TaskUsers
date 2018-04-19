@@ -19,11 +19,12 @@ class Comments extends Component {
     }
 
     render() {
+        const postId = this.props.selectedPost.id;
         return (
             <div>
                 <div className='text'>
-                    <p>{this.props.selectedPost.id}</p>
-                    <p className='postText'>{this.props.selectedPost.title}<br/> <br/>{this.props.selectedPost.body}</p>
+                    <p>{postId}</p>
+                    <p className='postText'>{postId}<br/> <br/>{postId}</p>
                 </div>
                 <div>
                     {this.showComments()}
