@@ -4,7 +4,6 @@ export const showPosts = (item) => dispatch => {
             fetch('https://jsonplaceholder.typicode.com/posts?userId='+item.id)
                 .then(response => response.json())
                 .then(json => {
-                    console.log(json);
                     dispatch({ type: 'SHOW_POSTS', payload: json});
                 });
 

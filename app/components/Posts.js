@@ -31,12 +31,9 @@ class Posts extends Component {
         };
     }
         render() {
-        console.log(this.props.selectedUser);
         const PostsComponent = () => {
           return (
-              <div>
-                  <div>{this.showUserPosts()}</div>
-              </div>
+                  <div className='userPosts'>{this.showUserPosts()}</div>
           );
         };
         const CommentsComponent = () => {

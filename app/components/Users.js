@@ -45,7 +45,7 @@ class Users extends Component {
         const userComponent = () => {
             return(
                 <div className='allUsers'>
-                    <OwlCarousel loop autoWidth items={5} className='owl-theme' nav>
+                    <OwlCarousel loop autoWidth items={4} className='owl-theme' nav>
                         {this.showUsers()}
                     </OwlCarousel>
                 </div>

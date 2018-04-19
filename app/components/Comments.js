@@ -9,7 +9,7 @@ class Comments extends Component {
           return this.props.comments.map((item) => {
               return (
                   <div key={item.id} className='comment'>
-                      <h1>{item.name}</h1>
+                      <h1 className='titleComments'>{item.name}</h1>
                       <p>{item.email}</p>
                       <p>{item.body}</p>
                   </div>
