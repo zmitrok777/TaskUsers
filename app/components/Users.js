@@ -2,51 +2,44 @@ import React, {Component} from 'react';
 import OwlCarousel from 'react-owl-carousel'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import Posts from './Posts.js';
+import {connect} from 'react-redux';
+import {showPosts} from '../redux/modules/posts/postsActions';
+import {bindActionCreators} from 'redux';
+import {showUsers} from '../redux/modules/users/usersActions';
+import {showSelectedUser} from '../redux/modules/posts/postsActions';
 
 
 class Users extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            posts:[],
-            userPosts:[],
-            selectedUser:{}
-        };
-
         this.showUsers = () => {
-            return this.props.value.map((item)=>(
+            if(this.props.users.length === 0) {
+                this.props.showUsers();
+            }
+            return this.props.users.map((item)=>(
                 <Link to='/posts' key={item.id}>
                     <div className='user' onClick={() =>{
-                        this.showPosts(item.id, item);
-                        this.selectUser(item);
+                        this.handleShowPosts(item);
                     }}>
-                        <p className='userName'><strong>{item.name}</strong><br/>{item.company.name}</p>
-                        <p className='contacts'>{item.email} <br/> {item.phone}</p>
+                         <p className='userName'><strong>{item.name}</strong><br/>{item.company.name}</p>
+                         <p className='contacts'>{item.email} <br/> {item.phone}</p>
                     </div>
                 </Link>
 
             ));
         };
 
-        this.selectUser = (user) => {
-            this.setState({ selectedUser: user});
-        };
-
-        this.showPosts = (id) => {
-            this.setState({userPosts: []});
-            fetch('https://jsonplaceholder.typicode.com/posts?userId='+id)
-                .then(response => response.json())
-                .then(json => {
-                    this.setState({userPosts: json});
-                });
-        };
+        this.handleShowPosts = (item) => {
+            this.props.showSelectedUser(item);
+            this.props.showPosts(item);
+        }
     }
 
 
     render() {
         const userPosts = () => {
             return (
-                <Posts value={this.state.userPosts} user={this.state.selectedUser}/>
+                <Posts/>
             )
         };
         const userComponent = () => {
@@ -69,5 +62,14 @@ class Users extends Component {
         )
     }
 }
+const mapStateToProps = (state) => ({
+    users: state.usersReducer.users,
+    posts: state.postsReducer.posts,
+});
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    showPosts,
+        showUsers,
+            showSelectedUser
+}, dispatch);
 
-export default Users;
+export default connect(mapStateToProps, mapDispatchToProps)(Users);

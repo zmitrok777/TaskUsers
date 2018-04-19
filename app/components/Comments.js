@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
+import {connect} from "react-redux";
 
 class Comments extends Component {
     constructor(props) {
         super(props);
 
         this.showComments = () => {
-          return this.props.value.map((item) => {
+          return this.props.comments.map((item) => {
               return (
                   <div key={item.id} className='comment'>
                       <h1>{item.name}</h1>
@@ -21,8 +22,8 @@ class Comments extends Component {
         return (
             <div>
                 <div className='text'>
-                    <p>{this.props.post.id}</p>
-                    <p className='postText'>{this.props.post.title}<br/> <br/>{this.props.post.body}</p>
+                    <p>{this.props.selectedPost.id}</p>
+                    <p className='postText'>{this.props.selectedPost.title}<br/> <br/>{this.props.selectedPost.body}</p>
                 </div>
                 <div>
                     {this.showComments()}
@@ -31,5 +32,9 @@ class Comments extends Component {
         );
     }
 }
+const mapStateToProps = (state) => ({
+    comments: state.commentsReducer.comments,
+    selectedPost:   state.commentsReducer.selectedPost
+});
 
-export default Comments
+export default connect(mapStateToProps)(Comments);
